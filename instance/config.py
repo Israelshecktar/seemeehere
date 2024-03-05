@@ -1,0 +1,6 @@
+SECRET_KEY = 'ab2123445'
+UPLOAD_FOLDER = 'faces'
+MYSQL_HOST = 'localhost'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'abolanle12@'
+MYSQL_DB = 'attendance-system-python'
