@@ -1,63 +1,70 @@
 {% include 'header.html' %}
-<body>
+<style>
+  /* Custom styles for specific link hover effects */
+  .dashboard-link:hover, .manage-users-link:hover, .logout-link:hover {
+    background-color: #8E44AD; /* Purple background on hover */
+    border-radius: 15px; /* Rounded edges */
+    padding: 5px 10px; /* Some padding inside the highlight */
+    text-decoration: none; /* No underline on hover */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for background color */
+  }
+</style>
+<body style="background: linear-gradient(to right, #FFB6C1, #FFC0CB);">
   <div class="container-fluid" id="main">
-  {% include 'top_menus.html' %}
+    {% include 'top_menus.html' %}
     <div class="row row-offcanvas row-offcanvas-left">
       {% include 'left_menus.html' %}
-      <div class="col-md-9 col-lg-10 main">
-		<h2></h2>
-		<br>
-		<br>
-		<br>
+      <div class="col main pt-5 mt-3">
         <div class="row mb-3">
-          <div class="col-xl-3 col-lg-6">
-            <div class="card card-inverse card-success">
-              <div class="card-block bg-success">
+          <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-center text-white h-100" style="background-color: #28B463;">
+              <div class="card-body">
                 <div class="rotate">
-                  <i class="fa fa-user fa-5x"></i>
+                  <i class="fa fa-user fa-4x"></i>
                 </div>
-                <h6 class="text-uppercase">Admin</h6>
-                <h1 class="display-1"><a href="books.php">50</a></h1>
+                <h6 class="text-uppercase">Admins</h6>
+                <h1 class="display-4">50</h1>
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-6">
-            <div class="card card-inverse card-info">
-              <div class="card-block bg-info">
+          <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-center text-white h-100" style="background-color: #3498DB;">
+              <div class="card-body">
                 <div class="rotate">
-                  <i class="fa fa-twitter fa-5x"></i>
+                  <i class="fa fa-twitter fa-4x"></i>
                 </div>
                 <h6 class="text-uppercase">Total Staffs</h6>
-                <h1 class="display-1"><a href="books.php">40</a></h1>
+                <h1 class="display-4">40</h1>
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-6">
-            <div class="card card-inverse card-warning">
-              <div class="card-block bg-warning">
+          <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-center text-white h-100" style="background-color: #F4D03F;">
+              <div class="card-body">
                 <div class="rotate">
-                  <i class="fa fa-share fa-5x"></i>
+                  <i class="fa fa-share fa-4x"></i>
                 </div>
                 <h6 class="text-uppercase">Present Today</h6>
-                <h1 class="display-1"><a href="books.php">38</a></h1>
+                <h1 class="display-4">38</h1>
               </div>
             </div>
           </div>
-		  <div class="col-xl-3 col-lg-6">
-            <div class="card card-inverse card-danger">
-              <div class="card-block bg-danger">
+          <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-center text-white h-100" style="background-color: #CB4335;">
+              <div class="card-body">
                 <div class="rotate">
                   <i class="fa fa-list fa-4x"></i>
                 </div>
                 <h6 class="text-uppercase">Absent Today</h6>
-                <h1 class="display-1"><a href="issue_books.php">2</a></h1>
+                <h1 class="display-4">2</h1>
               </div>
             </div>
           </div>
         </div>
-        <hr>
-       </div>
+        <!-- Add your content here -->
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
