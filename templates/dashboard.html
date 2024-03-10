@@ -2,29 +2,43 @@
 <style>
   /* Custom styles for specific link hover effects */
   .dashboard-link:hover, .manage-users-link:hover, .logout-link:hover {
-    background-color: #8E44AD; /* Purple background on hover, based on thematic consistency [citation:4] */
-    border-radius: 15px; /* Rounded edges for a smoother look [citation:7] */
-    padding: 5px 10px; /* Some padding inside the highlight for better visibility [citation:5] */
-    text-decoration: none; /* No underline on hover to keep it sleek [citation:3] */
-    cursor: pointer; /* Pointer cursor on hover for better UX [citation:4] */
-    transition: background-color 0.3s ease-in-out; /* Smooth transition for background color [citation:3] */
+    background-color: #8E44AD; /* Purple background on hover */
+    border-radius: 15px; /* Rounded edges for a smoother look */
+    padding: 5px 10px; /* Some padding inside the highlight for better visibility */
+    text-decoration: none; /* No underline on hover to keep it sleek */
+    cursor: pointer; /* Pointer cursor on hover for better UX */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for background color */
   }
 
   /* Styles for card hover effect - enhancing UI interaction */
   .card:hover {
-    transform: scale(1.05); /* Slightly enlarge the card for emphasis [citation:6] */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for transform and shadow [citation:11] */
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.2); /* Add shadow to make the card pop [citation:10] */
+    transform: scale(1.05); /* Slightly enlarge the card for emphasis */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for transform and shadow */
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2); /* Add shadow to make the card pop */
+  }
+
+  /* Adjusting card sizes for better fit on the page */
+  .card {
+    max-width: 400px; /* Reducing card width */
+    margin: auto; /* Centering card within its column */
+  }
+
+  /* Ensure cards are responsive across different devices */
+  @media (max-width: 768px) {
+    .col-sm-6 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
   }
 </style>
 <body style="background: linear-gradient(to right, #FFB6C1, #FFC0CB);">
   <div class="container-fluid" id="main">
     {% include 'top_menus.html' %}
     <div class="row row-offcanvas row-offcanvas-left">
-      {% include 'left_menus.html' %}
       <div class="col main pt-5 mt-3">
         <div class="row mb-3">
-          <div class="col-xl-3 col-sm-6 py-2">
+          <!-- Changing the order of sidebar menu and cards section -->
+          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-left: 300px;"> <!-- Added margin to cards section -->
             <div class="card text-center text-white h-100" style="background-color: #28B463;">
               <div class="card-body">
                 <div class="rotate">
@@ -35,7 +49,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-sm-6 py-2">
+          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-right: 20px;">
             <div class="card text-center text-white h-100" style="background-color: #3498DB;">
               <div class="card-body">
                 <div class="rotate">
@@ -46,7 +60,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-sm-6 py-2">
+          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-right: 20px;">
             <div class="card text-center text-white h-100" style="background-color: #F4D03F;">
               <div class="card-body">
                 <div class="rotate">
@@ -57,7 +71,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-sm-6 py-2">
+          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-right: 20px;">
             <div class="card text-center text-white h-100" style="background-color: #CB4335;">
               <div class="card-body">
                 <div class="rotate">
@@ -68,10 +82,10 @@
               </div>
             </div>
           </div>
+		  	{% include 'left_menus.html' %}
         </div>
-        <!-- Add your content here -->
       </div>
     </div>
   </div>
 </body>
-</html>
+
