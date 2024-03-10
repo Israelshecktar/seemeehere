@@ -2,12 +2,19 @@
 <style>
   /* Custom styles for specific link hover effects */
   .dashboard-link:hover, .manage-users-link:hover, .logout-link:hover {
-    background-color: #8E44AD; /* Purple background on hover */
-    border-radius: 15px; /* Rounded edges */
-    padding: 5px 10px; /* Some padding inside the highlight */
-    text-decoration: none; /* No underline on hover */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease-in-out; /* Smooth transition for background color */
+    background-color: #8E44AD; /* Purple background on hover, based on thematic consistency [citation:4] */
+    border-radius: 15px; /* Rounded edges for a smoother look [citation:7] */
+    padding: 5px 10px; /* Some padding inside the highlight for better visibility [citation:5] */
+    text-decoration: none; /* No underline on hover to keep it sleek [citation:3] */
+    cursor: pointer; /* Pointer cursor on hover for better UX [citation:4] */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for background color [citation:3] */
+  }
+
+  /* Styles for card hover effect - enhancing UI interaction */
+  .card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card for emphasis [citation:6] */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for transform and shadow [citation:11] */
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2); /* Add shadow to make the card pop [citation:10] */
   }
 </style>
 <body style="background: linear-gradient(to right, #FFB6C1, #FFC0CB);">
