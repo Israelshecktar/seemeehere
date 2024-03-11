@@ -1,91 +1,66 @@
 {% include 'header.html' %}
-<style>
-  /* Custom styles for specific link hover effects */
-  .dashboard-link:hover, .manage-users-link:hover, .logout-link:hover {
-    background-color: #8E44AD; /* Purple background on hover */
-    border-radius: 15px; /* Rounded edges for a smoother look */
-    padding: 5px 10px; /* Some padding inside the highlight for better visibility */
-    text-decoration: none; /* No underline on hover to keep it sleek */
-    cursor: pointer; /* Pointer cursor on hover for better UX */
-    transition: background-color 0.3s ease-in-out; /* Smooth transition for background color */
-  }
-
-  /* Styles for card hover effect - enhancing UI interaction */
-  .card:hover {
-    transform: scale(1.05); /* Slightly enlarge the card for emphasis */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for transform and shadow */
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.2); /* Add shadow to make the card pop */
-  }
-
-  /* Adjusting card sizes for better fit on the page */
-  .card {
-    max-width: 400px; /* Reducing card width */
-    margin: auto; /* Centering card within its column */
-  }
-
-  /* Ensure cards are responsive across different devices */
-  @media (max-width: 768px) {
-    .col-sm-6 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-</style>
-<body style="background: linear-gradient(to right, #FFB6C1, #FFC0CB);">
+<body style="background-color: pink;">
   <div class="container-fluid" id="main">
-    {% include 'top_menus.html' %}
+  {% include 'top_menus.html' %}
     <div class="row row-offcanvas row-offcanvas-left">
-      <div class="col main pt-5 mt-3">
+      {% include 'left_menus.html' %}
+      <div class="col-md-9 col-lg-10 main">
+        <!-- Spacing -->
+        <h2></h2>
+        <br>
+        <br>
+        <br>
+        <!-- Cards Section -->
         <div class="row mb-3">
-          <!-- Changing the order of sidebar menu and cards section -->
-          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-left: 300px;"> <!-- Added margin to cards section -->
-            <div class="card text-center text-white h-100" style="background-color: #28B463;">
-              <div class="card-body">
-                <div class="rotate">
-                  <i class="fa fa-user fa-4x"></i>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-inverse card-success" style="transition: transform 0.3s ease-in-out; cursor: pointer;">
+              <div class="card-block bg-success" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                <div class="rotate" style="margin: 0 auto;">
+                  <i class="fa fa-user fa-5x"></i>
                 </div>
-                <h6 class="text-uppercase">Admins</h6>
-                <h1 class="display-4">50</h1>
+                <h6 class="text-uppercase">Total Teacher</h6>
+                <h1 class="display-1"><a href="books.php">150</a></h1>
               </div>
             </div>
           </div>
-          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-right: 20px;">
-            <div class="card text-center text-white h-100" style="background-color: #3498DB;">
-              <div class="card-body">
-                <div class="rotate">
-                  <i class="fa fa-twitter fa-4x"></i>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-inverse card-info" style="transition: transform 0.3s ease-in-out; cursor: pointer;">
+              <div class="card-block bg-info" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                <div class="rotate" style="margin: 0 auto;">
+                  <i class="fa fa-twitter fa-5x"></i>
                 </div>
-                <h6 class="text-uppercase">Total Staffs</h6>
-                <h1 class="display-4">40</h1>
+                <h6 class="text-uppercase">Total Student</h6>
+                <h1 class="display-1"><a href="books.php">30</a></h1>
               </div>
             </div>
           </div>
-          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-right: 20px;">
-            <div class="card text-center text-white h-100" style="background-color: #F4D03F;">
-              <div class="card-body">
-                <div class="rotate">
-                  <i class="fa fa-share fa-4x"></i>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-inverse card-warning" style="transition: transform 0.3s ease-in-out; cursor: pointer;">
+              <div class="card-block bg-warning" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                <div class="rotate" style="margin: 0 auto;">
+                  <i class="fa fa-share fa-5x"></i>
                 </div>
                 <h6 class="text-uppercase">Present Today</h6>
-                <h1 class="display-4">38</h1>
+                <h1 class="display-1"><a href="books.php">50</a></h1>
               </div>
             </div>
           </div>
-          <div class="col-xl-2 col-md-2 col-lg-1 py-2" style="margin-right: 20px;">
-            <div class="card text-center text-white h-100" style="background-color: #CB4335;">
-              <div class="card-body">
-                <div class="rotate">
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-inverse card-danger" style="transition: transform 0.3s ease-in-out; cursor: pointer;">
+              <div class="card-block bg-danger" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                <div class="rotate" style="margin: 0 auto;">
                   <i class="fa fa-list fa-4x"></i>
                 </div>
                 <h6 class="text-uppercase">Absent Today</h6>
-                <h1 class="display-4">2</h1>
+                <h1 class="display-1"><a href="issue_books.php">80</a></h1>
               </div>
             </div>
           </div>
-		  	{% include 'left_menus.html' %}
         </div>
+        <!-- Horizontal Rule -->
+        <hr>
       </div>
     </div>
   </div>
 </body>
-
+</html>

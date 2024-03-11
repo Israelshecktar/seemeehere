@@ -1,76 +1,42 @@
-{% include 'header.html' %}
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        .col-md-3, .col-lg-2 {
-            width: auto; /* Adjust according to your sidebar width requirements */
-        }
-
-        .sidebar-offcanvas {
-            position: fixed; /* Ensures the sidebar stays in place on scroll */
-            height: 100%;
-            background-color: #F699CD; /* Light grey background, adjust as needed */
-        }
-
-        .nav {
-            list-style-type: none; /* Removes list bullets */
-            padding: 0;
-        }
-
-        .nav-link {
-            display: block; /* Makes the complete area clickable */
-            text-decoration: none; /* Removes underline from links */
-            color: #333; /* Darker text for better readability */
-            padding: 10px; /* Spacing around text */
-            border-radius: 20px; /* Rounded edges for aesthetics */
-            transition: background-color 0.3s ease-in-out, color 0.3s, padding-left 0.3s; /* Smooth transitions */
-        }
-
-        .nav-link:hover {
-            background-color: #d63384; /* A deeper pink for hover */
-            color: #fff; /* White text for contrast */
-            padding-left: 25px; /* Shifts text to create a dynamic effect on hover */
-        }
-
-        .nav-icons {
-            margin-right: 10px; /* Space between icon and text */
-            width: 20px; /* Uniform icon size */
-        }
-
-        /* Adjust based on your color scheme */
-        .leftMenus .nav-link {
-            color: #333;
-        }
-
-        .leftMenus .nav-link:hover {
-            background-color: #d63384;
-            color: #fff;
-        }
-    </style>
-</head>
-<body>
-<div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
-    <ul class="nav flex-column pl-1 leftMenus">
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('dashboard') }}">
-                <i class="nav-icons fas fa-tachometer-alt"></i> Dashboard
-            </a>
-        </li>
-        {% if session['role'] == 'admin' %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('users') }}">
-                <i class="nav-icons fas fa-users-cog"></i> Manage Users
-            </a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">
-                <i class="nav-icons fas fa-sign-out-alt"></i> Logout
-            </a>
-        </li>
-    </ul>
+<div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation" style="background-color: #ff85c2; min-height: 100vh;">
+  <ul class="nav flex-column pl-1 leftMenus">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('dashboard') }}" style="color: black; transition: background-color 0.3s; border-radius: 15px;">
+        <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
+      </a>
+    </li>
+    {% if session['role'] == 'admin' %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('users') }}" style="color: black; transition: background-color 0.3s; border-radius: 15px;">
+        <i class="fa fa-users" aria-hidden="true"></i> Manage Users
+      </a>
+    </li>
+    {% endif %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('logout') }}" style="color: black; transition: background-color 0.3s; border-radius: 15px;">
+        <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+      </a>
+    </li>
+  </ul>
 </div>
 
-<!-- Ensures that the Font Awesome script is correctly placed at the end for optimized loading -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-</body>
-</html>
+<style>
+  html, body {
+    height: 100%; /* Ensure the full height for the background */
+    margin: 0; /* Remove default margin */
+  }
+  #sidebar {
+    background-color: #ff85c2; /* Your chosen color */
+    min-height: 100vh; /* Use 100% of the viewport height */
+  }
+  .leftMenus .nav-link {
+    color: black; /* Text color */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    border-radius: 15px; /* Rounded edges for hover effect */
+  }
+  .leftMenus .nav-link:hover {
+    background-color: #C50282;
+    color: white;
+  }
+</style>
+

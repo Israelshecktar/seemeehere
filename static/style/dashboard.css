@@ -1,5 +1,6 @@
 body{
-	font-size:12px;
+        font-size:12px;
+		background-color: #FFA6C9;
 }
 
 
@@ -11,7 +12,7 @@ body{
     transition: all 0.25s ease-out;
   }
   .row-offcanvas-left .sidebar-offcanvas {
-	  left: -33%;
+          left: -33%;
   }
   .row-offcanvas-left.active {
     left: 33%;
@@ -28,14 +29,14 @@ body{
 
 @media screen and (max-width: 34em) {
   .row-offcanvas-left .sidebar-offcanvas {
-	left: -45%;
+        left: -45%;
   }
   .row-offcanvas-left.active {
-	left: 45%;
-	margin-left: -6px;
+        left: 45%;
+        margin-left: -6px;
   }
   .sidebar-offcanvas {
-	width: 45%;
+        width: 45%;
   }
 }
 
@@ -65,15 +66,15 @@ body{
 }
 
 .display-1 a {
-	text-decoration:none;
+        text-decoration:none;
 }
 
 .leftMenus a {
-	font-size:17px;
-	color: #FF007F;
-	font-weight:bold;
+        font-size:17px;
+        color: #FF007F;
+        font-weight:bold;
 }
 
 .nav-link {
-	color:white;
+        color:white;
 }

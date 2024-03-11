@@ -1,35 +1,91 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #C50282;">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="display: flex; align-items: center;">
-      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="rounded-circle" style="width:40px; height:40px; object-fit: cover;">
-      <div style="margin-left: 10px;">
-        <span style="font-size: 24px; color: white; font-weight: bold;">FRBAS</span>
-        <small style="font-size: 12px; color: black; display: block;">Let's Count</small>
-      </div>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#" style="color: white; font-size: 30px; font-weight: bold;">Face Recognition Based Attendance System</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        {% if session['userid'] %}
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color: white;">{{ session['name'] }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="btn btn-outline-light" href="{{ url_for('login') }}">Login</a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-</nav>
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRBAS - Top Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        .navbar-custom {
+            background-color: #C50282 !important;
+            width: 103%; /* Extend to full width */
+            margin-left: -15px; /* Adjust based on your layout */
+            margin-right: -15px; /* Adjust based on your layout */
+        }
+        .navbar {
+            padding-left: 10px; /* Remove padding if any */
+            padding-right: 10px; /* Remove padding if any */
+        }
+        .navbar-brand {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .brand-text {
+            margin-left: 10px; /* Adjust spacing as needed */
+        }
+        .brand-desc {
+            display: block;
+            color: #000;
+            font-size: 12px;
+        }
+        .navbar-nav .nav-link:hover {
+            background-color: #A5016B; /* Darker shade for hover effect */
+        }
+        .rounded-logo {
+            border-radius: 50%;
+        }
+        .centered-title {
+            text-align: center;
+            width: 100%;
+            color: white; /* Adjust color as needed */
+        }
+        /* Ensure proper alignment */
+        .navbar-collapse {
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-custom">
+        <a class="navbar-brand" href="#">
+            <img src="static/logo.png" width="50" height="50" class="rounded-logo d-inline-block align-top" alt="">
+            <span class="brand-text">
+                FRBAS
+                <small class="brand-desc">Let's count</small>
+            </span>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="collapsingNavbar">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                    <h1 class="centered-title">Face Recognition Based Attendance System</h1>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if session['userid'] %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{session.name}} </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}"> Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
