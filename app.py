@@ -196,7 +196,7 @@ def attendance():
 def generate(userImage):
     IMAGE_FILES = []
     filename = []
-    imageDir = r'C:\python_program\face-recognition-attendance-system-python-flask-mysql\faces'
+    imageDir = 'seemeehere/faces'
 
     if userImage:
         img_path = os.path.join(imageDir, userImage)
