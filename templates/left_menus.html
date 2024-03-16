@@ -1,42 +1,69 @@
-<div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation" style="background-color: #ff85c2; min-height: 100vh;">
+<style>
+/* Base and Responsive Styles Combined */
+#sidebar {
+  background-color: #ff85c2;  /* Pinkish background for the sidebar */
+  min-height: 100vh;  /* Ensure sidebar extends full viewport height */
+  width: 100%;  /* Default width to 100% for smaller screens */
+}
+
+.leftMenus .nav-link {
+  color: black;  /* Black text color */
+  transition: background-color 0.3s;  /* Smooth transition for hover state */
+  border-radius: 15px;  /* Rounded corners */
+  padding: 10px;  /* Ensure links have padding for better touch targets on mobile */
+}
+
+.leftMenus .nav-link:hover {
+  background-color: #C50282;  /* Dark pink on hover */
+  color: white;  /* White text color on hover */
+}
+
+@media (min-width: 577px) {  /* Adjust for phones upwards to apply sidebar width */
+  #sidebar {
+    width: 200px; /* Adjusted width for small tablets and upwards */
+  }
+}
+
+@media (min-width: 769px) {  /* Adjust for small tablets upwards to increase sidebar width */
+  #sidebar {
+    width: 250px; /* Increased width for tablets and large devices */
+  }
+}
+
+@media (max-width: 576px) { /* Specific styles for small devices */
+  #sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%); /* Initially hide sidebar for mobile */
+  }
+  #sidebar.active {
+    transform: translateX(0); /* Show sidebar on toggle */
+  }
+}
+</style>
+<div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
   <ul class="nav flex-column pl-1 leftMenus">
     <li class="nav-item">
-      <a class="nav-link" href="{{ url_for('dashboard') }}" style="color: black; transition: background-color 0.3s; border-radius: 15px;">
+      <a class="nav-link" href="{{ url_for('dashboard') }}">
         <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
       </a>
     </li>
     {% if session['role'] == 'admin' %}
     <li class="nav-item">
-      <a class="nav-link" href="{{ url_for('users') }}" style="color: black; transition: background-color 0.3s; border-radius: 15px;">
+      <a class="nav-link" href="{{ url_for('users') }}">
         <i class="fa fa-users" aria-hidden="true"></i> Manage Users
       </a>
     </li>
     {% endif %}
     <li class="nav-item">
-      <a class="nav-link" href="{{ url_for('logout') }}" style="color: black; transition: background-color 0.3s; border-radius: 15px;">
+      <a class="nav-link" href="{{ url_for('logout') }}">
         <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
       </a>
     </li>
   </ul>
 </div>
-
-<style>
-  html, body {
-    height: 100%; /* Ensure the full height for the background */
-    margin: 0; /* Remove default margin */
-  }
-  #sidebar {
-    background-color: #ff85c2; /* Your chosen color */
-    min-height: 100vh; /* Use 100% of the viewport height */
-  }
-  .leftMenus .nav-link {
-    color: black; /* Text color */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    border-radius: 15px; /* Rounded edges for hover effect */
-  }
-  .leftMenus .nav-link:hover {
-    background-color: #C50282;
-    color: white;
-  }
-</style>
-
