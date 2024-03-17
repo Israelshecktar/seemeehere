@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
 from flask import Flask, flash, render_template, request, redirect, url_for, session, Response
-from werkzeug.utils import secure_filename
+from flask_bcrypt import Bcrypt
+from werkzeug.utils import secure_filename, redirect
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import cv2
@@ -24,30 +25,31 @@ def allowed_file(filename):
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile('config.py')
-
+bcrypt = Bcrypt(app)
 mysql = MySQL(app)
 
 @app.route('/')
-@app.route('/login', methods =['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    mesage = ''
+    message = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
         password = request.form['password']
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM user WHERE email = % s AND password = % s', (email, password, ))
-        user = cursor.fetchone()
-        if user:
-            session['loggedin'] = True
-            session['userid'] = user['id']
-            session['name'] = user['first_name']
-            session['email'] = user['email']
-            session['role'] = user['role']
-            mesage = 'Logged in successfully !'
-            return redirect(url_for('dashboard'))
-        else:
-            mesage = 'Please enter correct email / password !'
-    return render_template('login.html', mesage = mesage)
+        if email and password:
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT * FROM user WHERE email = %s', (email,))
+            user = cursor.fetchone()
+            if user and bcrypt.check_password_hash(user['password'], password):
+                session['loggedin'] = True
+                session['userid'] = user['id']
+                session['name'] = user['first_name']
+                session['email'] = user['email']
+                session['role'] = user['role']
+                message = 'Logged in successfully !'
+                return redirect(url_for('dashboard'))
+            else:
+                message = 'Email or password is incorrect !'
+    return render_template('login.html', message=message)
 
 @app.route("/dashboard", methods =['GET', 'POST'])
 def dashboard():
@@ -162,29 +164,37 @@ def logout():
     session.pop('email', None)
     return redirect(url_for('login'))
 
-@app.route('/register', methods =['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    mesage = ''
-    if request.method == 'POST' and 'name' in request.form and 'password' in request.form and 'email' in request.form :
-        userName = request.form['name']
-        password = request.form['password']
-        email = request.form['email']
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM user WHERE email = % s', (email, ))
-        account = cursor.fetchone()
-        if account:
-            mesage = 'Account already exists !'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            mesage = 'Invalid email address !'
-        elif not userName or not password or not email:
-            mesage = 'Please fill out the form !'
+    if request.method == 'POST':
+        userName = request.form.get('name')
+        password = request.form.get('password')
+        email = request.form.get('email')
+
+        # Validate email format
+        if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            flash('Invalid email address!', 'error') # Add a category 'error' for styling
         else:
-            cursor.execute('INSERT INTO user VALUES (NULL, % s, % s, % s)', (userName, email, password, ))
-            mysql.connection.commit()
-            mesage = 'You have successfully registered !'
-    elif request.method == 'POST':
-        mesage = 'Please fill out the form !'
-    return render_template('register.html', mesage = mesage)
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT * FROM user WHERE email = %s', (email,))
+            account = cursor.fetchone()
+            # Check if account already exists
+            if account:
+                flash('Account already exists!', 'info') # 'info' as a category for informational messages
+            else:
+                # Attempt to register the user
+                try:
+                    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+                    cursor.execute('INSERT INTO user (name, email, password) VALUES (%s, %s, %s)', (userName, email, hashed_password,))
+                    mysql.connection.commit()
+                    flash('You have successfully registered!', 'success') # 'success' for successful operations
+                except Exception as e:
+                    flash('Registration failed due to an internal error. Please try again.', 'error') # Log this exception
+
+        return redirect(url_for('register')) # Redirect back to the registration page to show flash messages
+
+    # For GET requests, or if any other method is used, just show the registration page.
+    return render_template('register.html')
 
 @app.route("/attendance", methods =['GET', 'POST'])
 def attendance():
