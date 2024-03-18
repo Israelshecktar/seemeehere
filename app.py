@@ -28,10 +28,8 @@ app.config.from_pyfile('config.py')
 bcrypt = Bcrypt(app)
 mysql = MySQL(app)
 
-@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    message = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
         password = request.form['password']
@@ -45,11 +43,13 @@ def login():
                 session['name'] = user['first_name']
                 session['email'] = user['email']
                 session['role'] = user['role']
-                message = 'Logged in successfully !'
+                flash('Logged in successfully!', 'success')
                 return redirect(url_for('dashboard'))
             else:
-                message = 'Email or password is incorrect !'
-    return render_template('login.html', message=message)
+                flash('Email or password is incorrect!', 'error')
+        else:
+            flash('Missing email or password', 'error')
+    return render_template('login.html')
 
 @app.route("/dashboard", methods =['GET', 'POST'])
 def dashboard():

@@ -5,10 +5,15 @@
   <div class="row justify-content-center">
     <div class="col-md-6 mt-4"> <!-- Added mt-5 for margin-top -->
       <h2 class="text-center">User Login</h2>
-      <form action="{{ url_for('login') }}" method="post">
-        {% if mesage is defined and mesage %}
-          <div class="alert alert-warning text-center">{{ mesage }}</div>
+      <!-- Flash Messages Display -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} text-center">{{ message }}</div>
+          {% endfor %}
         {% endif %}
+      {% endwith %}
+      <form action="{{ url_for('login') }}" method="post">
         <div class="form-group">
           <label for="email">Email:</label>
           <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
