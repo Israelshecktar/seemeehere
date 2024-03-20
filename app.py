@@ -282,11 +282,12 @@ def generate(userImage):
 
 @app.route('/take_attendance/<userid>')
 def take_attendance(userid):
-    userId = request.args.get('userid')
-    print(f"Attempting to take attendance for user ID: {userId}")  # Log user ID
+    # Directly use the userid from the URL parameter instead of trying to get it from request.args
+    print(f"Attempting to take attendance for user ID: {userid}")
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM user WHERE id = % s', (userId, ))
+    # Ensure the query correctly uses the placeholder syntax for parameters
+    cursor.execute('SELECT * FROM user WHERE id = %s', (userid, ))
     user = cursor.fetchone()
 
     if user and user['picture']:
@@ -297,9 +298,10 @@ def take_attendance(userid):
         except Exception as e:
             print(f"An error occurred: {e}")
             traceback.print_exc()
+            return 'Error during face recognition process', 500  # Provide a generic error message for the client
     else:
         print("No user picture available or user not found")
-        return 'No user picture available', 404
+        return 'No user picture available or user not found', 404
 
 if __name__ == "__main__":
     app.run(debug=True)
