@@ -12,7 +12,6 @@ from datetime import datetime
 import re
 import os
 import sys
-import traceback
 
 
 UPLOAD_FOLDER = 'faces'
@@ -51,7 +50,7 @@ def login():
             flash('Missing email or password', 'error')
     return render_template('login.html')
 
-@app.route("/dashboard", methods =['GET', 'POST'])
+@app.route("/", methods =['GET', 'POST'], strict_slashes=False)
 def dashboard():
     if 'loggedin' in session:
         return render_template("dashboard.html")
