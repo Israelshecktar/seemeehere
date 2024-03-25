@@ -190,9 +190,8 @@ def register():
                 except Exception as e:
                     flash('Registration failed due to an internal error. Please try again.', 'error') # Log this exception
 
-        return redirect(url_for('register')) # Redirect back to the registration page to show flash messages
+        return redirect(url_for('register'))
 
-    # For GET requests, or if any other method is used, just show the registration page.
     return render_template('register.html')
 
 @app.route("/attendance", methods =['GET', 'POST'])
@@ -208,7 +207,7 @@ def generate(userImage):
 
     # Updated image directory path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    imageDir = os.path.join(BASE_DIR, 'seemeehere', 'faces')
+
 
     if userImage:
         img_path = os.path.join(imageDir, userImage)
