@@ -207,74 +207,87 @@ def generate(userImage):
 
     # Updated image directory path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    IMAGE_DIR = os.path.dirname(os.path.abspath(__file__)) + '/faces'
 
-
-    if userImage:
-        img_path = os.path.join(imageDir, userImage)
+    try:
+        if userImage:
+            img_path = os.path.join(IMAGE_DIR, userImage)
 
         # Pre-check for image existence
-        if not os.path.exists(img_path):
-            print(f"File not found: {img_path}")
-            return  # Or handle more gracefully depending on your application needs
+            if not os.path.exists(img_path):
+                print(f"File not found: {img_path}")
+                yield b'Error: File not found.'
+                return
 
-        # Load and append image if exists
-        img = face_recognition.load_image_file(img_path)
-        IMAGE_FILES.append(img)
-        filename.append(userImage.split(".", 1)[0])
+            # Load and append image if exists
+            img = face_recognition.load_image_file(img_path)
+            IMAGE_FILES.append(img)
+            filename.append(userImage.split(".", 1)[0])
 
-    def encoding_img(IMAGE_FILES):
-        encodeList = []
-        for img in IMAGE_FILES:
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            encode = face_recognition.face_encodings(img)[0]
-            encodeList.append(encode)
-        return encodeList
+        def encoding_img(IMAGE_FILES):
+            encodeList = []
+            for img in IMAGE_FILES:
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                encode = face_recognition.face_encodings(img)[0]
+                encodeList.append(encode)
+            return encodeList
 
-    def addAttendance(name):
-        with open('attendance.csv', 'r+') as f:
-            mypeople_list = f.readlines()
-            dateList = []
-            now = datetime.now()
-            datestring = now.strftime('%m/%d/%Y')
-            for line in mypeople_list:
-                entry = line.split(',')
-                dateList.append(entry[1])
-            if datestring not in dateList:
-                f.writelines(f'\n{name},{datestring}')
+        def addAttendance(name):
+            with open('attendance.csv', 'r+') as f:
+                my_people_list = f.readlines()
+                dateList = []
+                now = datetime.now()
+                datestring = now.strftime('%m/%d/%Y')
+                for line in my_people_list:
+                    entry = line.split(',')
+                    dateList.append(entry[1])
+                if datestring not in dateList:
+                    f.writelines(f'\n{name},{datestring}')
 
-    encodeListKnown = encoding_img(IMAGE_FILES)
-    cap = cv2.VideoCapture(0)
+        encodeListKnown = encoding_img(IMAGE_FILES)
+        cap = cv2.VideoCapture(0)
 
-    while True:
-        success, img = cap.read()
-        imgc = cv2.resize(img, (0, 0), None, 0.25, 0.25)
-        imgc = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        while True:
+            success, img = cap.read()
+            if not success:
+                yield b'Error: Unable to access camera.'
+                break
 
-        facesCurrent = face_recognition.face_locations(imgc)
-        encode_facesCurrent = face_recognition.face_encodings(imgc, facesCurrent)
+            imgc = cv2.resize(img, (0, 0), None, 0.25, 0.25)
+            imgc = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        for encodeFace, faceLoc in zip(encode_facesCurrent, facesCurrent):
-            matches_face = face_recognition.compare_faces(encodeListKnown, encodeFace)
-            face_distance = face_recognition.face_distance(encodeListKnown, encodeFace)
-            matchIndex = np.argmin(face_distance)
+            facesCurrent = face_recognition.face_locations(imgc)
+            encode_facesCurrent = face_recognition.face_encodings(imgc, facesCurrent)
 
-            if matches_face[matchIndex]:
-                name = filename[matchIndex].upper()
-                putText = 'Captured'
-                y1, x2, y2, x1 = faceLoc
+            for encodeFace, faceLoc in zip(encode_facesCurrent, facesCurrent):
+                matches_face = face_recognition.compare_faces(encodeListKnown, encodeFace)
+                face_distance = face_recognition.face_distance(encodeListKnown, encodeFace)
+                matchIndex = np.argmin(face_distance)
 
-                cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
-                cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (255, 0, 0), cv2.FILLED)
-                cv2.putText(img, putText, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-                addAttendance(name)  # taking name for attendance function above
+                if matches_face[matchIndex]:
+                    name = filename[matchIndex].upper()
+                    putText = 'Captured'
+                    y1, x2, y2, x1 = faceLoc
 
-        frame = cv2.imencode('.jpg', img)[1].tobytes()
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-        key = cv2.waitKey(20)
-        if key == 27:
-            cap.release()
-            cv2.destroyAllWindows()
-            break
+                    cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
+                    cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (255, 0, 0), cv2.FILLED)
+                    cv2.putText(img, putText, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                    addAttendance(name)  # Taking name for attendance function above
+
+            frame = cv2.imencode('.jpg', img)[1].tobytes()
+            yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            key = cv2.waitKey(1)
+            if key == 27:  # Exit on ESC
+                break
+
+    except Exception as e:
+        app.logger.error(f"An error occurred in generate function: {e}", exc_info=True)
+        traceback.print_exc()
+        yield b'Error during face recognition process.'
+
+    finally:
+        cap.release()
+        cv2.destroyAllWindows()
 
 @app.route('/take_attendance/<userid>')
 def take_attendance(userid):
