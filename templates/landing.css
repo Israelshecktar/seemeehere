@@ -1,0 +1,70 @@
+body, html {
+	background-color: pink;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 100px 0;
+    background: url('cover-image.jpg') center/cover no-repeat;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.intro .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.features article {
+    max-width: 300px;
+}
+
+.features img {
+    width: 100%;
+    height: auto;
+}
+
+.about {
+    background-color: #f2f2f2;
+    padding: 50px;
+    text-align: center;
+}
+.intro h1 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: 48px; /* Adjust size as needed */
+        }
+        .intro p {
+            font-family: 'Roboto', serif;
+            font-weight: 400;
+            font-size: 20px; /* Adjust size as needed */
+        }
+
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+    }
+
+    .features article {
+        margin-bottom: 20px;
+    }
+}
