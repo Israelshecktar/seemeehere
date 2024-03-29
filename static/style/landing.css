@@ -2,13 +2,19 @@ body, html {
     background-color: pink;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+	font-family: 'Inter', sans-serif;
 }
 
 header {
     text-align: center;
     padding: 100px 0;
     background: url('cover-image.jpg') center/cover no-repeat;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700; /* Use a bolder weight for headings */
+}
+p, a, nav, /* and other elements */ {
+    font-weight: 400; /* Use a regular weight for body text */
 }
 
 nav {
@@ -27,6 +33,14 @@ nav {
     margin-top: 20px;
     font-size: 18px; /* Larger font size for better readability */
     transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effect */
+}
+.intro h1, .intro p {
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Hover effect for the intro text */
+.intro h1:hover, .intro p:hover {
+    color: #E0115F; /* Change to a deep pink color on hover */
 }
 
 .intro .cta-button:hover {
@@ -60,12 +74,15 @@ nav {
     font-family: 'Raleway', sans-serif;
     font-weight: 800;
     font-size: 48px; /* Adjust size as needed */
+	color: #FF1493;
+	margin-bottom: 0;
 }
 
 .intro p {
     font-family: 'Roboto', serif;
     font-weight: 400;
-    font-size: 20px; /* Adjust size as needed */
+    font-size: 20px;
+	margin-top: 10px;
 }
 
 /* Responsive adjustments */
