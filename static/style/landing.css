@@ -1,0 +1,114 @@
+body, html {
+    background-color: pink;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 100px 0;
+    background: url('cover-image.jpg') center/cover no-repeat;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+	align-items: center;
+}
+.intro .cta-button {
+    display: inline-block;
+    padding: 15px 30px; /* Increased padding for a larger button */
+    background-color: #FF1493; /* Rosy pink color */
+    color: white;
+    text-decoration: none;
+    border-radius: 25px; /* Rounded edges */
+    margin-top: 20px;
+    font-size: 18px; /* Larger font size for better readability */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.intro .cta-button:hover {
+    background-color: #E0115F; /* A darker shade of pink for the hover effect */
+    transform: scale(1.05); /* Slightly increase the size */
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.features article {
+    max-width: 300px;
+}
+
+.features img {
+    width: 100%;
+    height: auto;
+}
+
+.about {
+    background-color: #f2f2f2;
+    padding: 50px;
+    text-align: center;
+}
+
+.intro h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    font-size: 48px; /* Adjust size as needed */
+}
+
+.intro p {
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    font-size: 20px; /* Adjust size as needed */
+}
+
+/* Responsive adjustments */
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    header {
+        padding: 50px 0;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .features {
+        flex-direction: row;
+    }
+
+    .features article {
+        margin-bottom: 0;
+    }
+
+    nav {
+        padding: 0 30px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    header {
+        padding: 150px 0;
+    }
+
+    .intro h1 {
+        font-size: 60px;
+    }
+
+    .intro p {
+        font-size: 24px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .features article {
+        max-width: 350px;
+    }
+}

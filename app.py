@@ -50,7 +50,11 @@ def login():
             flash('Missing email or password', 'error')
     return render_template('login.html')
 
-@app.route("/", methods =['GET', 'POST'], strict_slashes=False)
+@app.route('/', strict_slashes=False)
+def landing():
+    return render_template('landing.html')
+
+@app.route("/dashboard", methods =['GET', 'POST'])
 def dashboard():
     if 'loggedin' in session:
         return render_template("dashboard.html")
