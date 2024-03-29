@@ -1,53 +1,78 @@
+/* Base styles */
 body, html {
     background-color: pink;
     margin: 0;
     padding: 0;
-	font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
+/* Header styles */
 header {
     text-align: center;
     padding: 100px 0;
     background: url('cover-image.jpg') center/cover no-repeat;
 }
+
+/* Typography styles */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700; /* Use a bolder weight for headings */
-}
-p, a, nav, /* and other elements */ {
-    font-weight: 400; /* Use a regular weight for body text */
+    font-weight: 700;
 }
 
+p, a, nav {
+    font-weight: 400;
+}
+
+/* Navigation styles */
 nav {
     display: flex;
     justify-content: space-between;
     padding: 0 15px;
-	align-items: center;
-}
-.intro .cta-button {
-    display: inline-block;
-    padding: 15px 30px; /* Increased padding for a larger button */
-    background-color: #FF1493; /* Rosy pink color */
-    color: white;
-    text-decoration: none;
-    border-radius: 25px; /* Rounded edges */
-    margin-top: 20px;
-    font-size: 18px; /* Larger font size for better readability */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effect */
-}
-.intro h1, .intro p {
-    transition: color 0.3s ease; /* Smooth transition for color change */
+    align-items: center;
 }
 
-/* Hover effect for the intro text */
+/* Intro section styles */
+.intro .cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #FF1493;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    margin-top: 20px;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.intro h1, .intro p {
+    transition: color 0.3s ease;
+}
+
+.intro h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    color: #FF1493;
+    margin-bottom: 0;
+}
+
+.intro p {
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* Hover effects */
 .intro h1:hover, .intro p:hover {
-    color: #E0115F; /* Change to a deep pink color on hover */
+    color: #E0115F;
 }
 
 .intro .cta-button:hover {
-    background-color: #E0115F; /* A darker shade of pink for the hover effect */
-    transform: scale(1.05); /* Slightly increase the size */
+    background-color: #E0115F;
+    transform: scale(1.05);
 }
 
+/* Features section styles */
 .features {
     display: flex;
     justify-content: space-around;
@@ -64,38 +89,21 @@ nav {
     height: auto;
 }
 
+/* About section styles */
 .about {
-    background-color: #f2f2f2;
+    background-color: #00214D;
     padding: 50px;
     text-align: center;
-	background-color: #FF1493;
-	color: white;
+    color: white;
 }
 
-.intro h1 {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 800;
-    font-size: 48px; /* Adjust size as needed */
-	color: #FF1493;
-	margin-bottom: 0;
-}
-
-.intro p {
-    font-family: 'Roboto', serif;
-    font-weight: 400;
-    font-size: 20px;
-	margin-top: 10px;
-}
-
-/* Responsive adjustments */
-/* Small devices (landscape phones, 576px and up) */
+/* Media queries for responsive design */
 @media (min-width: 576px) {
     header {
         padding: 50px 0;
     }
 }
 
-/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .features {
         flex-direction: row;
@@ -110,7 +118,6 @@ nav {
     }
 }
 
-/* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     header {
         padding: 150px 0;
@@ -125,7 +132,6 @@ nav {
     }
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     .features article {
         max-width: 350px;
