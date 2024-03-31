@@ -50,7 +50,8 @@ def login():
             flash('Missing email or password', 'error')
     return render_template('login.html')
 
-@app.route('/', strict_slashes=False)
+@app.route('/', methods=['GET', 'POST'], strict_slashes=False)
+@app.route('/about', methods=['GET', 'POST'], strict_slashes=False)
 def landing():
     return render_template('landing.html')
 
