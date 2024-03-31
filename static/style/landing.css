@@ -29,6 +29,7 @@ nav {
     padding: 0 15px;
     align-items: center;
 }
+
 .app-logo {
     width: 50px;
     height: auto;
@@ -55,7 +56,6 @@ nav {
     background-color: #E0115F;
     transform: scale(1.05);
 }
-
 
 /* Intro section styles */
 .intro .cta-button {
