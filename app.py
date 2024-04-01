@@ -316,5 +316,4 @@ def take_attendance(userid):
         return 'No user picture available or user not found', 404
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    os.execv(__file__, sys.argv)
+    app.run(host='0.0.0.0')
