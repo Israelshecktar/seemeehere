@@ -1,6 +1,0 @@
-mysql
-flask
-face-recognition
-opencv
-flask_mysqldb
-Flask-Bcrypt
