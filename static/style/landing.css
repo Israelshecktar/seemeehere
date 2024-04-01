@@ -10,7 +10,6 @@ body, html {
 header {
     text-align: center;
     padding: 100px 0;
-    background: url('cover-image.jpg') center/cover no-repeat;
 }
 
 /* Typography styles */
@@ -122,6 +121,12 @@ nav {
     padding: 50px;
     text-align: center;
     color: white;
+}
+/* Social media logo styles */
+.social-logo {
+    width: 35px;
+    height: 30px;
+    margin-right: 10px;
 }
 
 /* Media queries for responsive design */
