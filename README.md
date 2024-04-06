@@ -9,7 +9,7 @@
 Dive deeper into the SeeMeeHere's world:
 - [**SeeMeHere Live Application**](https://seemeehere-landing-page1.vercel.app/)
 - [**Project Journey and Insights - Blog Post**](https://your-blog-link.com)
-- [**Connect with the Author on LinkedIn**](https://www.linkedin.com/in/israel-ewedairo-439bb5240).
+- [**Connect with the Author on LinkedIn**](https://www.linkedin.com/in/israel-ewedairo-439bb5240)
 
 ![SeeMeHere Dashboard](https://seemeehere-landing-page1.vercel.app/images/dashboard.jpeg)
 
@@ -45,7 +45,7 @@ Navigate to the *manage user* section to enter the student's details and capture
 Select your desired class and initiate the face recognition process to automatically log the attendance of present students.
 
 ### Viewing Attendance Records
-Access and review detailed reports of attendance through the user-friendly dashboard.
+Access and review detailed reports of attendance through the user-friendly dashboard in real time and can be download in CSV file
 
 ## Contributing
 
@@ -61,7 +61,7 @@ Explore these related projects for more insights and contributions:
 
 ## Licensing
 
-SeeMeHere is proudly developed under the MIT License. For more information, please refer to the [LICENSE](https://github.com/Israelshecktar/SeeMeHere/LICENSE.md) file.
+SeeMeHere is developed under the [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.en.html). GPL-3.0 is a copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms, and also provides an express grant of patent rights from contributors to users. For more detailed information, please refer to the [LICENSE](https://github.com/Israelshecktar/SeeMeHere/GPL-3.0_LICENSE.md) file.
 
 ---
 
