@@ -1,0 +1,148 @@
+/* Basic Setup */
+:root {
+    --primary-color: #FF1493;
+    --hover-color: #E0115F;
+    --background-color: pink;
+    --text-color: #333;
+    --accent-color: #00214D;
+}
+
+body, html {
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6, p, a, nav {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+p, a, nav {
+    font-size: 1rem;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    align-items: center;
+}
+
+.app-logo, .social-logo {
+    width: 3.125rem;
+    height: auto;
+}
+
+/* Interactive Elements */
+.get-started-button, .intro .cta-button {
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.625rem 1.25rem;
+    border-radius: 1.5625rem;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.2s;
+}
+
+.get-started-button:hover, .intro .cta-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.features img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* Features articles layout improvements */
+.features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.features article {
+    width: 100%;
+    max-width: 300px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+
+/* Features and About Sections */
+.features, .about {
+    padding: 3.125rem 1rem;
+    text-align: center;
+}
+
+.features article {
+    max-width: 18.75rem;
+    margin: 0 auto;
+}
+
+.about {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+ .social-logo {
+   width: 30px;
+   height: 30px; /* Adjust the size as needed */
+   margin-right: 10px;
+}
+
+/* Media Queries for Improved Responsiveness */
+@media (min-width: 480px) {
+    header, .features, .about {
+        padding: 3.125rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px; /* Improved spacing */
+    }
+}
+
+@media (min-width: 768px) {
+    .features {
+        flex-direction: row;
+        justify-content: space-evenly;
+        gap: 0;
+    }
+
+    .features article {
+        margin: 0 15px; /* Spacing on larger screens */
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+}
