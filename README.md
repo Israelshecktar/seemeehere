@@ -9,7 +9,7 @@
 Dive deeper into the SeeMeeHere's world:
 - [**SeeMeHere Live Application**](https://seemeehere-landing-page1.vercel.app/)
 - [**Project Journey and Insights - Blog Post**](https://your-blog-link.com)
-- [**Connect with the Author on LinkedIn**](www.linkedin.com/in/israel-ewedairo-439bb5240)
+- [**Connect with the Author on LinkedIn**](https://www.linkedin.com/in/israel-ewedairo-439bb5240).
 
 ![SeeMeHere Dashboard](https://seemeehere-landing-page1.vercel.app/images/dashboard.jpeg)
 
