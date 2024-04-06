@@ -46,9 +46,6 @@ This guide provides instructions on how to set up the MySQL database for the See
     	password VARCHAR(255),
     	picture VARCHAR(255),
     	role VARCHAR(255)
-);
-
-        ...
      );
      ```
    - Repeat the process for all the necessary tables as per your application schema.
