@@ -7,18 +7,16 @@
     --accent-color: #00214D;
 }
 
-body, html {
+html, body{
     background-color: var(--background-color);
-    margin: 0;
-    padding: 0;
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
+        background-size: cover;
 }
 
 /* Header */
 header {
     text-align: center;
-    padding: 2rem 0;
 }
 
 /* Typography */
@@ -40,16 +38,57 @@ p, a, nav {
 }
 
 /* Navigation */
-nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 15px;
-    align-items: center;
-}
 
 .app-logo, .social-logo {
     width: 3.125rem;
     height: auto;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px;
+    align-items: center;
+}
+
+.intro {
+        width: 100%;
+        position: relative;
+        height: 100vh;
+        text-align: center;
+        overflow: hidden;
+}
+
+.cover-image {
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  opacity: 1.5; /* Adding some transparency to the image */
+  top: 0;
+  left: -10%;
+  margin-left: -10px;
+  margin-right: 0;
+  padding: 0, 1rem;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 4%;  /* Set to align the text to the right side */
+    transform: translateY(-50%);
+    color: #fff; /* Adjust this color based on your design */
+    font-size: 2rem; /* Example font size, adjust as needed */
+    width: 40%; /* Adjust based on your preference */
+    opacity: 1.5; /* Ensures text is fully opaque */
+    text-align: left; /* Align text to the right */
+}
+
+.text-overlay h1 {
+  color: #FF1493;
+}
+
+.text-overlay a.get-started-button {
+  margin: 40px; /* Apply spacing between the h1 and the "Get started" button */
 }
 
 /* Interactive Elements */

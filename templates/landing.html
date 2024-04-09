@@ -1,66 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="SeeMeeHere: Face Recognition Attendance System">
-    <title>SeeMeeHere!</title>
-	<link rel="stylesheet" href="/static/style/landing.css">
-    <link rel="shortcut icon" type="image/png" href="static/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-		<nav class="navigation-bar">
-            <img src="static/logo.png" alt="our-app-Logo" class="app-logo">
-			<a href="{{ url_for('dashboard') }}" class="get-started-button">Get started</a>
-        </nav>
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="description" content="SeeMeeHere: Face Recognition Attendance System">
+                <title>SeeMeeHere!</title>
+				<link rel="stylesheet" href="/static/style/landing.css">
+                <link rel="shortcut icon" type="image/png" href="static/logo.png">
+                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        </head>
+        <body>
+                <header>
+                        <nav class="navigation-bar">
+                                <img src="static/logo.png" alt="our-app-Logo" class="app-logo">
+                                <a href="{{ url_for('dashboard') }}" class="get-started-button">Get started</a>
+                        </nav>
 
-        <div class="intro">
-            <h1>SeeMeeHere!</h1>
-            <p>Revolutionizing Attendance Management with Cutting-Edge Face Recognition Technology</p>
-            <img src="https://www.lystloc.com/blog/wp-content/uploads/2022/11/ezgif.com-gif-maker-6.webp" alt="Cover Image" class="cover-image">
-            <a href="{{ url_for('dashboard') }}" class="cta-button">Get started</a>
-        </div>
-    </header>
+                        <div class="intro">
+                                <div class="text-overlay">
+                                        <h1>SEEMEEHERE</h1>
+                                        <p>Revolutionizing Attendance Management with Cutting-Edge Face Recognition Technology</p>
+                                        <a href="{{ url_for('dashboard') }}" class="get-started-button">Get started</a>
+                                </div>
 
-    <section class="features">
-        <article>
-            <img src="static/face-recognition.jpg" alt="Real-time Face Detection">
-            <h2>Real-time Face Detection</h2>
-            <p>Our system identifies individuals instantly, making the attendance recording process fast and effortless.</p>
-        </article>
-        <article>
-            <img src="static/Automation.jpg" alt="Seamless Integration">
-            <h2>Seamless Integration</h2>
-            <p>This app fits perfectly into your existing workflow, complementing your operational ecosystem without the need for complex setups.</p>
-        </article>
-        <article>
-            <img src="static/secure.jpg" alt="Secure and Reliable">
-            <h2>Secure and Reliable</h2>
-            <p>Security is paramount; our system ensures your data is encrypted, stored, and managed with the highest security standards.</p>
-        </article>
-    </section>
+                                <img src="static/cover_image.png" alt="Cover Image" class="cover-image">
+                        </div>
+                </header>
 
-    <section class="about">
-        <h2>About the Project</h2>
-        <p>At the heart of SeeMeeHere lies a story of passion and innovation. As a software engineer with a keen interest in the intersection of technology and education, I envisioned a system that could transform the traditional attendance process. My journey through Alx_africa instilled in me the values of efficiency and security, which became the pillars of this project.</p>
-        <p>The idea took shape during my time at Alx_africa, where I saw firsthand the challenges educators faced with attendance management. Determined to make a difference, SeeMeeHere was born out of the desire to offer a seamless, secure, and swift solution. This project is not just a requirement; it's a reflection of my commitment to educational excellence and technological advancement.</p>
-        <p>SeeMeeHere is also a proud Portfolio Project for <a href="https://www.alxafrica.com/" target="_blank">Alx_africa</a>, showcasing the practical application of the skills and knowledge acquired during my studies.</p>
-		 <div class="social-links">
-        <a href="https://www.linkedin.com/in/israel-ewedairo-439bb5240" target="_blank">
-            <img src="static/linkedin.png" alt="LinkedIn Logo" class="social-logo">
-        </a>
-        <a href="https://github.com/Israelshecktar" target="_blank">
-            <img src="static/github.png" alt="GitHub Logo" class="social-logo">
-        </a>
-        <a href="https://twitter.com/shecktar5" target="_blank">
-            <img src="static/twitter.png" alt="Twitter Logo" class="social-logo">
-        </a>
-        <a href="https://github.com/Israelshecktar/seemeehere" target="_blank">
-            Project Repository
-        </a>
-    </div>
-    </section>
-</body>
+                <section class="features">
+                        <article>
+                                <img src="static/face-recognition.jpg" alt="Real-time Face Detection">
+                                <h2>Real-time Face Detection</h2>
+                                <p>Our system identifies individuals instantly, making the attendance recording process fast and effortless.</p>
+                        </article>
+                        <article>
+                                <img src="static/Automation.jpg" alt="Seamless Integration">
+                                <h2>Seamless Integration</h2>
+                                <p>This app fits perfectly into your existing workflow, complementing your operational ecosystem without the need for complex setups.</p>
+                        </article>
+                        <article>
+                                <img src="static/secure.jpg" alt="Secure and Reliable">
+                                <h2>Secure and Reliable</h2>
+                                <p>Security is paramount; our system ensures your data is encrypted, stored, and managed with the highest security standards.</p>
+                        </article>
+                </section>
+
+                <section class="about">
+                        <h2>About the Project</h2>
+                        <p>At the heart of SeeMeeHere lies a story of passion and innovation. As a software engineer with a keen interest in the intersection of technology and education, I envisioned a system that could transform the traditional attendance process. My journey through Alx_africa instilled in me the values of efficiency and security, which became the pillars of this project.</p>
+                        <p>The idea took shape during my time at Alx_africa, where I saw firsthand the challenges educators faced with attendance management. Determined to make a difference, SeeMeeHere was born out of the desire to offer a seamless, secure, and swift solution. This project is not just a requirement; it's a reflection of my commitment to educational excellence and technological advancement.</p>
+                        <p>SeeMeeHere is also a proud Portfolio Project for <a href="https://www.alxafrica.com/" target="_blank">Alx_africa</a>, showcasing the practical application of the skills and knowledge acquired during my studies.</p>
+                        <div class="social-links">
+                                <a href="https://www.linkedin.com/in/israel-ewedairo-439bb5240" target="_blank">
+                                        <img src="static/linkedin.png" alt="LinkedIn Logo" class="social-logo">
+                                </a>
+                                <a href="https://github.com/Israelshecktar" target="_blank">
+                                        <img src="static/github.png" alt="GitHub Logo" class="social-logo">
+                                </a>
+                                <a href="https://twitter.com/shecktar5" target="_blank">
+                                        <img src="static/twitter.png" alt="Twitter Logo" class="social-logo">
+                                </a>
+                                <a href="https://github.com/Israelshecktar/seemeehere" target="_blank">
+                                        Project Repository
+                                </a>
+                        </div>
+                </section>
+        </body>
 </html>
