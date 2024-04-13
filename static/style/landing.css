@@ -7,16 +7,18 @@
     --accent-color: #00214D;
 }
 
-html, body{
+html, body {
+    margin: 0;
+    padding: 0;
     background-color: var(--background-color);
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
-        background-size: cover;
 }
 
 /* Header */
 header {
     text-align: center;
+    overflow: hidden; /* Prevents overflow */
 }
 
 /* Typography */
@@ -26,7 +28,7 @@ h1, h2, h3, h4, h5, h6, p, a, nav {
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 3rem;
 }
 
 h2 {
@@ -38,7 +40,6 @@ p, a, nav {
 }
 
 /* Navigation */
-
 .app-logo, .social-logo {
     width: 3.125rem;
     height: auto;
@@ -54,41 +55,33 @@ nav {
 .intro {
         width: 100%;
         position: relative;
-        height: 100vh;
+        height: 100vh; /* Full viewport height */
         text-align: center;
-        overflow: hidden;
 }
 
 .cover-image {
-  background-size: cover;
+  position: absolute;
+  left: 0;
   width: 100%;
-  height: auto;
-  opacity: 1.5; /* Adding some transparency to the image */
-  top: 0;
-  left: -10%;
-  margin-left: -10px;
-  margin-right: 0;
-  padding: 0, 1rem;
+  height: 100%;
 }
 
 .text-overlay {
     position: absolute;
     top: 50%;
-    left: 4%;  /* Set to align the text to the right side */
-    transform: translateY(-50%);
-    color: #fff; /* Adjust this color based on your design */
-    font-size: 2rem; /* Example font size, adjust as needed */
-    width: 40%; /* Adjust based on your preference */
-    opacity: 1.5; /* Ensures text is fully opaque */
-    text-align: left; /* Align text to the right */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary-color); /* Dynamic variable for easy theme change */
+    font-size: 2rem;
+    width: 90%;
 }
 
 .text-overlay h1 {
-  color: #FF1493;
+    color: var(--primary-color); /* Keeping 'SEEMEEHERE' in pink */
 }
 
-.text-overlay a.get-started-button {
-  margin: 40px; /* Apply spacing between the h1 and the "Get started" button */
+.text-overlay p {
+    color: white; /* Changing descriptive text to white */
 }
 
 /* Interactive Elements */
@@ -152,21 +145,48 @@ nav {
    margin-right: 10px;
 }
 
-/* Media Queries for Improved Responsiveness */
+.about .social-logo {
+    margin-top: 20px; /* Move social media logos slightly down */
+}
+
+.testimonials {
+    text-align: center;
+    padding: 20px;
+    background-color: pink;
+}
+.testimonial-slider {
+    display: flex;
+    overflow-x: scroll;
+}
+.testimonial {
+    flex: 0 0 100%;
+    max-width: 350px;
+    margin: auto;
+    padding: 15px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+.testimonial-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+}
+@media (min-width: 768px) {
+    .testimonial {
+        flex: 0 0 33.333%;
+    }
+}
+
 @media (min-width: 480px) {
-    header, .features, .about {
-        padding: 3.125rem;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
     .features {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 20px; /* Improved spacing */
+        gap: 20px;
+    }
+
+    h1 {
+        font-size: 4rem;
     }
 }
 
@@ -178,10 +198,28 @@ nav {
     }
 
     .features article {
-        margin: 0 15px; /* Spacing on larger screens */
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .get-started-button {
+        margin-top: 20px; /* Moves the button down on smaller screens */
+    }
+}
+
+/* Additional Media Queries for Enhanced Responsiveness */
+@media (min-width: 480px) and (max-width: 768px) {
+    .get-started-button {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem; /* Slightly reduce padding */
     }
 
-    h1 {
-        font-size: 3rem;
+@media only screen and (max-width: 768px) {
+    .text-overlay {
+        font-size: 1.5rem;
+        width: 90%; /* Allows better reading on small devices */
+        text-align: center;
     }
 }

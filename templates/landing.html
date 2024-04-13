@@ -5,7 +5,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta name="description" content="SeeMeeHere: Face Recognition Attendance System">
                 <title>SeeMeeHere!</title>
-				<link rel="stylesheet" href="/static/style/landing.css">
+				<link rel="stylesheet" href="static/style/landing.css">
                 <link rel="shortcut icon" type="image/png" href="static/logo.png">
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
         </head>
@@ -17,13 +17,12 @@
                         </nav>
 
                         <div class="intro">
+							<img src="static/cover_image.png" alt="Cover Image" class="cover-image">
                                 <div class="text-overlay">
                                         <h1>SEEMEEHERE</h1>
                                         <p>Revolutionizing Attendance Management with Cutting-Edge Face Recognition Technology</p>
                                         <a href="{{ url_for('dashboard') }}" class="get-started-button">Get started</a>
                                 </div>
-
-                                <img src="static/cover_image.png" alt="Cover Image" class="cover-image">
                         </div>
                 </header>
 
@@ -44,6 +43,30 @@
                                 <p>Security is paramount; our system ensures your data is encrypted, stored, and managed with the highest security standards.</p>
                         </article>
                 </section>
+
+				<section class="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial-slider">
+            <article class="testimonial">
+                <img src="static/emmy.jpg" alt="Emmydev247 Photo" class="testimonial-image">
+                <p class="testimonial-text">"This application has significantly streamlined our attendance processes with its robust face recognition technology."</p>
+                <h3 class="user-name">Mr Emmanuel</h3>
+                <p class="user-role">School Administrator</p>
+            </article>
+             <article class="testimonial">
+                <img src="static/seun.jpg" alt="Femi Photo" class="testimonial-image">
+                <p class="testimonial-text">"seemeehere is very fast and swift, will recommend anytime, anyday!."</p>
+                <h3 class="user-name">Mr Femi Davies</h3>
+                <p class="user-role">School Principal</p>
+            </article>
+			 <article class="testimonial">
+                <img src="static/Toyin.jpg" alt="Mrs Toyin Photo" class="testimonial-image">
+                <p class="testimonial-text">"The coolest part of this application is that i can always view my child's attendance anytime..i'm impressed!"</p>
+                <h3 class="user-name">Mrs Toyin Jones</h3>
+                <p class="user-role">Parent</p>
+            </article>
+        </div>
+    </section>
 
                 <section class="about">
                         <h2>About the Project</h2>
