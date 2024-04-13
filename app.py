@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# Imports neccesary modules and classes for flask application
 from flask import Flask, flash, render_template, request, redirect, url_for, session, Response
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename, redirect
@@ -13,30 +14,36 @@ import re
 import os
 import sys
 
-
+# configuration for file uploads
 UPLOAD_FOLDER = 'faces'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-
+# Functions to check if the uploaded file is allowed
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# initializes flask app and configurations
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile('config.py')
 bcrypt = Bcrypt(app)
 mysql = MySQL(app)
 
+# Route for handling login with method POST for summitting  form data
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
         password = request.form['password']
+        # Checks if email and password are not empty
         if email and password:
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            # Execute SQL query to find user by email
             cursor.execute('SELECT * FROM user WHERE email = %s', (email,))
             user = cursor.fetchone()
+            # If user exists and passwords match, log the user in and redirect to dashboard
             if user and bcrypt.check_password_hash(user['password'], password):
+                # Set login session variables
                 session['loggedin'] = True
                 session['userid'] = user['id']
                 session['name'] = user['first_name']
@@ -50,26 +57,35 @@ def login():
             flash('Missing email or password', 'error')
     return render_template('login.html')
 
+# Routes for handling landing and about page
 @app.route('/', methods=['GET', 'POST'], strict_slashes=False)
 @app.route('/about', methods=['GET', 'POST'], strict_slashes=False)
 def landing():
     return render_template('landing.html')
 
+# Route for handling user's dashboard
 @app.route("/dashboard", methods =['GET', 'POST'])
 def dashboard():
+    # Check if user is logged in
     if 'loggedin' in session:
         return render_template("dashboard.html")
     return redirect(url_for('login'))
 
+# Route for user management interface
 @app.route("/users", methods =['GET', 'POST'])
 def users():
+    # Ensure user is logged in and has user management privileges
     if 'loggedin' in session:
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        # Retrieve all users with the role 'user'
         cursor.execute("SELECT * FROM user WHERE role = 'user'")
         users = cursor.fetchall()
+         # Renders the users.html template showing the list of users
         return render_template("users.html", users = users)
+     # Redirect to the login page if user is not logged in
     return redirect(url_for('login'))
 
+# Route for adding or updating user information
 @app.route("/save_user", methods =['GET', 'POST'])
 def save_user():
     msg = ''
@@ -77,6 +93,7 @@ def save_user():
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         if request.method == 'POST' and 'role' in request.form and 'first_name' in request.form and 'last_name' in request.form and 'email' in request.form :
 
+             # Retrieves form data
             first_name = request.form['first_name']
             last_name = request.form['last_name']
             email = request.form['email']
@@ -86,10 +103,13 @@ def save_user():
             filename = ''
             if 'file' in request.files:
                 file = request.files['file']
+                  # Validate and save the uploaded file
                 if file and file.filename != '' and allowed_file(file.filename):
                     filename = secure_filename(file.filename)
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+
+             # Updates or inserts user information based on the form action
             if action == 'updateUser':
                 userId = request.form['userid']
                 cursor.execute('UPDATE user SET first_name= %s, last_name= %s, email= %s, picture= %s, role= %s WHERE id = %s', (first_name, last_name, email, filename, role, (userId, ), ))
@@ -105,6 +125,7 @@ def save_user():
         return redirect(url_for('users'))
     return redirect(url_for('login'))
 
+# Route for editing user information; provides the data input form for user update
 @app.route("/edit_user", methods =['GET', 'POST'])
 def edit_user():
     msg = ''
@@ -118,6 +139,7 @@ def edit_user():
     return redirect(url_for('login'))
 
 
+# Route for viewing detailed information about a user
 @app.route("/view_user", methods =['GET', 'POST'])
 def view_user():
     if 'loggedin' in session:
@@ -128,6 +150,8 @@ def view_user():
         return render_template("view_user.html", user = user)
     return redirect(url_for('login'))
 
+
+# Route for changing user password
 @app.route("/password_change", methods =['GET', 'POST'])
 def password_change():
     mesage = ''
@@ -168,6 +192,7 @@ def logout():
     session.pop('email', None)
     return redirect(url_for('login'))
 
+# Route for processing user registration
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -294,8 +319,10 @@ def generate(userImage):
         cap.release()
         cv2.destroyAllWindows()
 
+# Route for taking attendance using face recognition
 @app.route('/take_attendance/<userid>')
 def take_attendance(userid):
+     # Handling taking attendance with face recognition
     print(f"Attempting to take attendance for user ID: {userid}")
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -315,5 +342,6 @@ def take_attendance(userid):
         print("No user picture available or user not found")
         return 'No user picture available or user not found', 404
 
+# The main function to run the Flask application
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
