@@ -13,6 +13,8 @@ from datetime import datetime
 import re
 import os
 import sys
+import traceback
+
 
 # configuration for file uploads
 UPLOAD_FOLDER = 'faces'
@@ -231,25 +233,35 @@ def attendance():
         return render_template("attendance.html", userid = userId)
     return redirect(url_for('login'))
 
+# Ensure the camera index is accessible
+def validate_camera_access(max_cameras=10):
+    for index in range(max_cameras):
+        cap = cv2.VideoCapture(index)
+        if cap.isOpened():
+            cap.release()
+            return index
+        cap.release()
+    raise RuntimeError("Error: Unable to access any camera. Ensure it is connected and not in use.")
+
 def generate(userImage):
-    IMAGE_FILES = []
-    filename = []
-
-    # Updated image directory path
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    IMAGE_DIR = os.path.dirname(os.path.abspath(__file__)) + '/faces'
-
+    cap = None
     try:
+        camera_index = validate_camera_access()
+
+        IMAGE_FILES = []
+        filename = []
+
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        IMAGE_DIR = os.path.join(BASE_DIR, 'faces')
+
         if userImage:
             img_path = os.path.join(IMAGE_DIR, userImage)
 
-        # Pre-check for image existence
             if not os.path.exists(img_path):
                 print(f"File not found: {img_path}")
                 yield b'Error: File not found.'
                 return
 
-            # Load and append image if exists
             img = face_recognition.load_image_file(img_path)
             IMAGE_FILES.append(img)
             filename.append(userImage.split(".", 1)[0])
@@ -275,7 +287,7 @@ def generate(userImage):
                     f.writelines(f'\n{name},{datestring}')
 
         encodeListKnown = encoding_img(IMAGE_FILES)
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(camera_index)
 
         while True:
             success, img = cap.read()
@@ -302,7 +314,7 @@ def generate(userImage):
                     cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
                     cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (255, 0, 0), cv2.FILLED)
                     cv2.putText(img, putText, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-                    addAttendance(name)  # Taking name for attendance function above
+                    addAttendance(name)
 
             frame = cv2.imencode('.jpg', img)[1].tobytes()
             yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
@@ -316,30 +328,35 @@ def generate(userImage):
         yield b'Error during face recognition process.'
 
     finally:
-        cap.release()
-        cv2.destroyAllWindows()
+        if cap:
+            cap.release()
+        # Since we can't use cv2.destroyAllWindows on some configurations,
+        # we ensure all windows are closed using a safer alternative if cv2.destroyAllWindows() is unsupported.
+        try:
+            cv2.destroyAllWindows()
+        except cv2.error as e:
+            app.logger.warning("cv2.destroyAllWindows() not supported; make sure your environment supports GUI operations")
+
 
 # Route for taking attendance using face recognition
 @app.route('/take_attendance/<userid>')
 def take_attendance(userid):
-     # Handling taking attendance with face recognition
-    print(f"Attempting to take attendance for user ID: {userid}")
+    app.logger.info(f"Attempting to take attendance for user ID: {userid}")
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM user WHERE id = %s', (userid, ))
+    cursor.execute('SELECT * FROM user WHERE id = %s', (userid,))
     user = cursor.fetchone()
 
     if user and user['picture']:
-        print(f"User found with picture: {user['picture']}")
+        app.logger.info(f"User found with picture: {user['picture']}")
         try:
             return Response(generate(user['picture']),
                             mimetype='multipart/x-mixed-replace; boundary=frame')
         except Exception as e:
-            print(f"An error occurred: {e}")
-            traceback.print_exc()
+            app.logger.error(f"An error occurred during face recognition process for user ID: {userid}: {e}")
             return 'Error during face recognition process', 500
     else:
-        print("No user picture available or user not found")
+        app.logger.warning(f"No user picture available or user not found for user ID: {userid}")
         return 'No user picture available or user not found', 404
 
 # The main function to run the Flask application
